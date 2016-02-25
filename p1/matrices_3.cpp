@@ -26,7 +26,7 @@ vector_inx_t matrix_t::pos(matrix_inx_t i,matrix_inx_t j)
 void matrix_t::crearMatriz(void) 
 {
 	M_= new matrix_item_t [m_*n_];	// Crea un vector de mxn elementos. 
-	
+   	
 	if (M_==NULL)  		// Si ha fallado la reserva de memoria. 
 		std::cerr << "Error creando matriz." << std::endl;
 }		
@@ -93,25 +93,15 @@ bool matrix_t::zero(matrix_item_t a, double precision){
 }
 
 void matrix_t::trasponer(){
-   matrix_item_t* aux;
-   aux = new matrix_item_t[n_*m_];
-   for(matrix_inx_t j=0; j<n_; j++)
-      for(matrix_inx_t i=0; i<m_; i++)
-         aux[pos(i,j)] = get_matrix_item(i,j);
-
-   redimensiona(n_, m_);
-   for(matrix_inx_t i=0; i<m_; i++)
-      for(matrix_inx_t j=0; j<n_; j++)
-         set_matrix_item(i, j, aux[pos(i,j)]);
-
-   delete [] aux;
+   traspuesta_ = true;
 }
 
 void matrix_t::filtra(matrix_t& M, matrix_item_t it, double precision){
-   for(matrix_inx_t i=0; i<m_; i++)
-      for(matrix_inx_t j=0; j<n_; j++){
+   M.redimensiona(m_,n_);
+   for(matrix_inx_t i=1; i<=m_; i++)
+      for(matrix_inx_t j=1; j<=n_; j++){
          if (igual(it, get_matrix_item(i,j), precision))
-            M.set_matrix_item(i, j, it); //puede que no haga falta
+            M.set_matrix_item(i, j, get_matrix_item(i,j)); //puede que no haga falta
          else
             M.set_matrix_item(i, j, 0.0);
       }
@@ -120,7 +110,8 @@ void matrix_t::filtra(matrix_t& M, matrix_item_t it, double precision){
 matrix_t::matrix_t(matrix_inx_t m,matrix_inx_t n):
 M_(NULL),
 m_(m),
-n_(n)
+n_(n),
+traspuesta_(false)
 {
 	crearMatriz();
 }	
@@ -131,7 +122,8 @@ n_(n)
 matrix_t::matrix_t(void):
 M_(NULL),
 m_(0),
-n_(0)
+n_(0),
+traspuesta_(false)
 {}		
 
 
@@ -148,18 +140,34 @@ void  matrix_t::mostrarMatriz(void)
 
 	char aux[80];
 
-	for(int i=1;i<=m_;i++){
-	
-		std::cout << "|";	
-		for(int j=1;j<=n_;j++){
-			sprintf(aux," %10.6lf ",get_matrix_item(i,j));
-			cout << aux;
-		}
-		std::cout << " |";
-		cout << endl;
-	}
+   if (!traspuesta_){
+      for(int i=1;i<=m_;i++){
+      
+         std::cout << "|";	
+         for(int j=1;j<=n_;j++){
+            sprintf(aux," %10.6lf ",get_matrix_item(i,j));
+            cout << aux;
+         }
+         std::cout << " |";
+         cout << endl;
+      }
 
-	cout << endl;	
+      cout << endl;
+   }else{
+      for(int j=1;j<=n_;j++){
+      
+         std::cout << "|";	
+         for(int i=1;i<=m_;i++){
+            sprintf(aux," %10.6lf ",get_matrix_item(i,j));
+            cout << aux;
+         }
+         std::cout << " |";
+         cout << endl;
+      }
+
+      cout << endl;
+
+   }
 }
 
 

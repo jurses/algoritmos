@@ -39,6 +39,8 @@ private:
 	matrix_inx_t  	m_;	/**< Número de filas.   */
 	matrix_inx_t	n_;	/**< Número de columnas.*/
 
+   bool traspuesta_;
+
 
 
 //========================================================================================
