@@ -34,4 +34,6 @@ int main(void)
    A.filtra(B,5.254,1.0);
    B.mostrarMatriz();
 
+   cout << "---   Contar entre 0 y 5.9 ---" << endl;
+   cout << A.contar_entre(0, 5.9, 1E-4) << endl;
 }

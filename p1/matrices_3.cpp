@@ -107,6 +107,16 @@ void matrix_t::filtra(matrix_t& M, matrix_item_t it, double precision){
       }
 }
 
+int matrix_t::contar_entre(matrix_item_t a, matrix_item_t b, double precision){
+   int aux = 0;
+   for(matrix_inx_t i=1; i<=m_; i++)
+      for(matrix_inx_t j=1; j<=n_; j++)
+         if(menor(a, get_matrix_item(i, j), precision) && mayor(b, get_matrix_item(i, j), precision))
+            aux++;
+
+   return aux;
+}
+
 matrix_t::matrix_t(matrix_inx_t m,matrix_inx_t n):
 M_(NULL),
 m_(m),
@@ -182,6 +192,7 @@ void matrix_t::set_matrix_item(matrix_inx_t i,matrix_inx_t j,matrix_item_t it)
 {
 	M_[pos(i,j)]=it;	
 }
+
 
 
 

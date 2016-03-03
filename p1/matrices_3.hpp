@@ -198,6 +198,7 @@ public:
    bool zero(matrix_item_t a, double precision);
    void filtra(matrix_t& M, matrix_item_t it, double precision);
    void trasponer();
+   int contar_entre(matrix_item_t a, matrix_item_t b, double precision);
 
 
 
