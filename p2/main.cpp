@@ -40,6 +40,8 @@ int main(int argc, char* argv[])
 	//const double sp = v2.scal_prod(v1);
 
 	//cout << "La maquina de la verdad dice que el producto escalar es: " << sp << endl;
+	v2.write_dense(cout);
+	cout << endl;
 
 	vector1.close();
 	vector2.close();

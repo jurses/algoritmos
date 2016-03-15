@@ -60,24 +60,26 @@ public:
 	~sparse_vector_t(void){}
 	
 	istream& read(istream& is){
-		/*
-		int nz;
 
-		is >> nz; //tamaño del vector
-
-		v_.resize(nz);
-		//añadir los elementos al vector v_
-		for(int i=0; i < v_.get_sz(); ++i){
-			if (is_not_zero(is, eps))
-				v_.get_set_v(nz).set(i, is);	
-		}
-		*/
 		is >> sz_;
 
 		v_.read(is);
 
 		return is;
 
+	}
+
+	ostream& write_dense(ostream& os) const{
+		int aux = 0;
+
+		for(int i=0; i < sz_; ++i){
+			if(i == v_.get_v(aux).get_inx()){
+				os << v_.get_v(aux).get_val() << " ";
+				++aux;
+			}else
+				os << 0.0 << " ";
+		}
+		return os;
 	}
 
 	ostream& write(ostream& os) const{
