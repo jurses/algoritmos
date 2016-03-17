@@ -48,14 +48,22 @@ public:
 	double scal_prod(const vector_t& v)const{
 		double aux = 0.0;
 
-		for(int i=0;i < v_.get_sz(); ++i){
-			cout << v_.get_v(i).get_val() << ' ' << i << endl;
+		for(int i=0;i < v_.get_sz(); ++i)
 			 aux += v_.get_v(i).get_val() * v.get_v(v_.get_v(i).get_inx());
-		}	
-
 
 		return aux;
 	}
+
+    double scal_prod(const sparse_vector_t& v)const{
+        double aux = 0.0;
+        
+        for(int i=0; i < v_.get_sz(); ++i)
+            for(int j=0; j < v.v_.get_sz(); ++j)
+                if (v_.get_v(i).get_inx() == v.v_.get_v(j).get_inx())
+                    aux += v_.get_v(i).get_val() * v.v_.get_v(j).get_val();
+
+        return aux;
+    }
 
 	~sparse_vector_t(void){}
 	
@@ -72,13 +80,15 @@ public:
 	ostream& write_dense(ostream& os) const{
 		int aux = 0;
 
-		for(int i=0; i < sz_; ++i){
-			if(i == v_.get_v(aux).get_inx()){
-				os << v_.get_v(aux).get_val() << " ";
-				++aux;
-			}else
-				os << 0.0 << " ";
-		}
+        for(int i=0; i < sz_; i++){
+                       
+                if(aux < v_.get_sz() && i == v_.get_v(aux).get_inx()){
+                    os << v_.get_v(aux).get_val() << " ";
+                    aux++;
+                }else
+                    os << 0.0 << " ";
+        }
+		
 		return os;
 	}
 

@@ -11,7 +11,7 @@ using namespace std;
 int main(int argc, char* argv[])
 {
 
-	if (argc != 3)
+	if (argc != 4)
 	{
 		cerr << "Usage: " << argv[0] << " vector1.txt vector2.txt" << endl;
 		return -1;
@@ -19,30 +19,39 @@ int main(int argc, char* argv[])
 
 	ifstream vector1;
 	ifstream vector2;
+    ifstream vector3;
 
 	vector1.open(argv[1]);
 	vector2.open(argv[2]); 
+    vector3.open(argv[3]);
 
-	vector_t v1;
-	sparse_vector_t v2;		
+	vector_t A;
+	sparse_vector_t B;
+    sparse_vector_t C;
 
-	v1.read(vector1);
-	v2.read(vector2);
+	A.read(vector1);
+	B.read(vector2);
+    C.read(vector3);
 
-	v1.write(cout);
+	A.write(cout);
         cout << endl;
-	v2.write(cout);
-	cout << endl;
+	B.write(cout);
+    	cout << endl;
+    C.write(cout);
+        cout << endl;
 
-	//cout << v1.scal_prod(v1) << endl;
+    B.write_dense(cout);
+        cout << endl;
+    C.write_dense(cout);
+        cout << endl;
 
-	cout << v2.scal_prod(v1) << endl;
-	//const double sp = v2.scal_prod(v1);
+    cout << B.scal_prod(A) << endl;
+    cout << A.scal_prod(A) << endl;
 
-	//cout << "La maquina de la verdad dice que el producto escalar es: " << sp << endl;
-	v2.write_dense(cout);
-	cout << endl;
+    cout << C.scal_prod(B) << endl;
 
+	
 	vector1.close();
 	vector2.close();
+    vector3.close();
 }
