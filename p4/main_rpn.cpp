@@ -41,8 +41,8 @@ bool is_pal(){
 int main(void)
 {
 
-    if(is_pal())
-        cout << "Es palíndromo" << endl;
+//    if(is_pal())
+//        cout << "Es palíndromo" << endl;
 
 	RPN_calc_t<stack_vector> calculadora_vector;
 	const int result_vector = calculadora_vector.compute(cin);
@@ -50,7 +50,7 @@ int main(void)
 
 	cin.clear();
 	cin.seekg(0, ios::beg);
-
+/*
 	RPN_calc_t<stack_lista> calculadora_lista;
 	const int result_lista = calculadora_lista.compute(cin);
 	cout << "Calculadora lista:  " << result_lista << endl;
@@ -61,7 +61,7 @@ int main(void)
 	RPN_calc_t<stack_stl> calculadora_stl;
 	const int result_stl = calculadora_stl.compute(cin);
 	cout << "Calculadora stl:    " << result_stl << endl;
-    
+  */  
     //PAP_t<stack> comprueba_ADN(cadena);
 	return 0;
 }
