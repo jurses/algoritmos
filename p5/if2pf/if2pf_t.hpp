@@ -85,11 +85,17 @@ namespace AED {
 				if (current_operator_id == RIGHT_PARENTHESIS) //A
 				{
                     //Si el operador es un cierre de paréntesis, sacar de la pila todos los operadores hasta encontrar un símbolo de apertura de paréntesis enviándolos a la salida.
-                    while(stack_.top() != LEFT_PARENTHESIS){
+                    while(!stack_.empty() && stack_.top() != LEFT_PARENTHESIS){
                         os << operator_sym[stack_.top()] << " ";
                         stack_.pop();
                     }
-                    stack_.pop();
+                    if(stack_.empty()){
+                        cerr << "la pila está vacía"<< endl;
+                        assert(!stack_.empty());
+                    }
+                    else
+                        stack_.pop();
+                    }
 				}
 				else if(stack_.empty() || 
                         current_operator_id == LEFT_PARENTHESIS ||
