@@ -96,7 +96,6 @@ namespace AED {
                     else
                         stack_.pop();
                     }
-				}
 				else if(stack_.empty() || 
                         current_operator_id == LEFT_PARENTHESIS ||
                         precedence[stack_.top()] <= precedence[current_operator_id] ){ //B
@@ -109,13 +108,13 @@ namespace AED {
 					/* … */
 				}else{ //C
 //              Si no se cumple ninguna de estas tres condiciones anteriores sacar todos los operadores de la pila, añadiéndolos a la salida, hasta que la pila se encuentre vacía o se encuentre un operador de precedencia estrictamente menor, y luego introducir el operador actual en la pila.
-                    while(!stack_.empty() ||
-                         (precedence[stack_.top()] < precedence[current_operator_id])){
-                        if(stack_.top() != LEFT_PARENTHESIS)
+                    while(!stack_.empty() && 
+                         (precedence[stack_.top()] >= precedence[current_operator_id])){
                             os << operator_sym[stack_.top()] << " ";
 
                         stack_.pop();
                     }
+                    stack_.push(current_operator_id);
                 }
             }
        };

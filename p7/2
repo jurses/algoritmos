@@ -1,0 +1,17 @@
+In file included from main_tree.cpp:2:0:
+tree_t.hpp:109:10: error: template-id ‘igual<>’ for ‘bool AED::tree_t<double>::igual(double, double)’ does not match any template declaration
+     bool tree_t<double>::igual(const double a, const double b){
+          ^~~~~~~~~~~~~~
+tree_t.hpp:109:62: note: saw 1 ‘template<>’, need 2 for specializing a member function template
+     bool tree_t<double>::igual(const double a, const double b){
+                                                              ^
+tree_t.hpp:173:35: error: no ‘int AED::tree_t<T>::output_size() const’ member function declared in class ‘AED::tree_t<T>’
+  int tree_t<T>::output_size(void) const
+                                   ^~~~~
+tree_t.hpp: In member function ‘std::ostream& AED::tree_t<T>::write(const T&, std::ostream&) const’:
+tree_t.hpp:181:26: error: expected primary-expression before ‘void’
+   os << setw(output_size(void)) << data;
+                          ^~~~
+tree_t.hpp:181:30: warning: there are no arguments to ‘output_size’ that depend on a template parameter, so a declaration of ‘output_size’ must be available [-fpermissive]
+   os << setw(output_size(void)) << data;
+                              ^
