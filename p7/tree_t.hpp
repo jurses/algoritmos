@@ -28,6 +28,7 @@ namespace AED {
 	tree_node_t<T>*& find(const T& data);
 	tree_node_t<T>*  find(const T& data) const;
 
+    int count_even(void);
 	int depth(void) const;
 	int depth(tree_node_t<T>* root, int d) const;
 	bool empty(void) const;
@@ -35,6 +36,7 @@ namespace AED {
 	ostream& write(ostream& os) const;
 
      private:
+    int count_even(tree_node_t<T>* root);
 
 	int output_size(void) const;
 	tree_node_t<T>*& find(tree_node_t<T>*& root, const T& data);
@@ -128,7 +130,7 @@ namespace AED {
     template <>
     bool tree_t<double>::menor(const double& a, const double& b) const
     {
-        return fabs(b-a) > TREE_EPS;
+        return (a-b) < -TREE_EPS;
     }
 
 	template <class T>
@@ -168,6 +170,7 @@ namespace AED {
 	template <class T>
 	int tree_t<T>::depth(tree_node_t<T>* root, int d) const 
 	{
+        /*
         if(root->get_left() != NULL){
             d++;
             depth(root->get_left(), d);
@@ -180,7 +183,28 @@ namespace AED {
             }
         }
                 return d;
+        */
+        if(/*root->get_left() and root->get_right() != NULL*/ root == NULL)
+            return d;
+        else{
+            d++;
+            int l = depth(root->get_left(), d);
+            int r = depth(root->get_right(), d);
+
+            return l>r ? l:r;
+        } 
+
 	}
+
+
+    template <class T>
+    int tree_t<T>::count_even(tree_node_t<T>* root)
+    {
+        if(root == NULL) 
+            return 0;
+        else
+            return ( 1 + count_even(root->get_right()) + count_even(root->get_left() ));
+    }
 
 	template <class T>
 	int tree_t<T>::depth(void) const
@@ -214,10 +238,26 @@ namespace AED {
 	ostream& tree_t<T>::write(tree_node_t<T>* root, ostream& os) const {
         if(root != NULL){
             write(root->get_left(), os);
-            os << root->get_data() << " ";
+            write(root->get_data(), os) << " ";
             write(root->get_right(), os);
         }else
     		return os;
 	}	
 
+    template <class T>
+    int tree_t<T>::count_even(void)
+    {
+        return count_even(root_);
+    }
+
 }
+
+
+/*
+ * Probar con double
+ * Modificación
+ * int tree_t<T>::count(tree_node<T>* root){
+ *    if(root == NULL) return 0
+ *    else{
+ *       return ((root->get_data % 2 == 0 ? 1:0)
+ */

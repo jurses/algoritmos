@@ -7,10 +7,10 @@ using namespace AED;
 
 int main(void)
 {
-	tree_t<int> tree;
+	tree_t<double> tree;
 
 	int input_sz;
-	int input_val;
+	double input_val;
 
 	cin >> input_sz;
 
@@ -26,6 +26,9 @@ int main(void)
 
 	cout << "Nivel máximo:" << endl;
 	cout << tree.depth() << endl;
+
+    cout << "Total pares:" << endl;
+    cout << tree.count_even() << endl;
 
 	return 0;
 }

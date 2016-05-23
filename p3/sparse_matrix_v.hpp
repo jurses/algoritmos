@@ -11,3 +11,4 @@ class sparse_matrix_v_t{
         short int n_;
         short int conf_;
 
+};
